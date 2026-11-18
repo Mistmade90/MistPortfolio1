@@ -90,6 +90,8 @@
   }
 
   const DISCORD_ID = '579581993050832896';
+  const LASTFM_USER = '';
+  const LASTFM_KEY = '';
 
   if (/^\d{15,22}$/.test(DISCORD_ID)) {
     let spotify = null;
@@ -132,7 +134,28 @@
         setText('#dc-label', 'Music');
         setText('#dc-title', 'Nothing playing right now');
         setText('#dc-artist', 'Starts showing as soon as I play something on Spotify');
+        showLastfm();
       }
+    };
+
+    const showLastfm = () => {
+      if (!LASTFM_USER || !LASTFM_KEY) return;
+      fetch(`https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${encodeURIComponent(LASTFM_USER)}&api_key=${encodeURIComponent(LASTFM_KEY)}&limit=1&format=json`)
+        .then((r) => r.json())
+        .then((j) => {
+          const t = j.recenttracks && j.recenttracks.track && j.recenttracks.track[0];
+          if (!t || spotify) return;
+          const live = t['@attr'] && t['@attr'].nowplaying === 'true';
+          const img = (t.image || []).map((i) => i['#text']).filter(Boolean).pop();
+          const art = $('#dc-art');
+          art.hidden = !img;
+          if (img) art.src = img;
+          $('#dc-music').classList.toggle('idle', !live);
+          setText('#dc-label', live ? 'Listening right now' : 'Last played');
+          setText('#dc-title', t.name);
+          setText('#dc-artist', t.artist['#text'] || t.artist.name || '');
+        })
+        .catch(() => {});
     };
 
     const progress = () => {
