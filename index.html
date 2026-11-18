@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mistmade90 Developer</title>
+<meta name="description" content="Portfolio of Mistmade90, a JavaScript, Luau, Lua and Python developer.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="assets/pfp.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="progress"></div>
+
+<header class="nav">
+  <a href="#home" class="logo mono">&lt;mistmade90/&gt;</a>
+  <nav class="links" id="links">
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Work</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <div class="clocks mono" aria-label="World clock">
+    <div class="clock"><small>Mist · Timezone</small><b id="clock-me">--:--:--</b></div>
+    <div class="clock you"><small>You</small><b id="clock-you">--:--:--</b></div>
+  </div>
+  <button class="burger" id="burger" aria-label="Menu"><span></span><span></span></button>
+</header>
+
+<main>
+<section id="home" class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+    <img class="pfp" src="assets/pfp.png" alt="Mistmade90 profile picture" width="150" height="150">
+    <div class="pill"><span class="dot"></span> Available for work</div>
+    <h1>I'm <span class="grad">Mistmade90</span></h1>
+    <p class="role mono">Developer · <span id="typed"></span><span class="caret"></span></p>
+    <p class="lead">I build fast, clean and reliable software in JavaScript, Luau, Lua and Python. Mostly Roblox systems, bots, tools and web apps.</p>
+    <div class="cta">
+      <a href="#projects" class="btn primary">View my work</a>
+      <a href="#contact" class="btn ghost">Contact me</a>
+    </div>
+  </div>
+  <a href="#about" class="scroll-hint mono" aria-label="Scroll down"><span></span>scroll</a>
+</section>
+
+<div class="marquee" aria-hidden="true">
+  <div class="track">
+    <span>JavaScript</span><span>Luau</span><span>Lua</span><span>Python</span><span>Roblox</span><span>Scripting</span>
+    <span>JavaScript</span><span>Luau</span><span>Lua</span><span>Python</span><span>Roblox</span><span>Scripting</span>
+  </div>
+</div>
+
+<section id="about" class="section">
+  <div class="sec-head"><span class="mono tag">01 / about</span><h2>Code is my <span class="grad">craft</span>.</h2></div>
+  <div class="about-grid">
+    <article class="card">
+      <h3>Who I am</h3>
+      <p>I'm a developer who cares about performance and clean code. Whether it's gameplay systems on Roblox, automation in Python or interfaces in JavaScript, I build things that run smoothly and stay maintainable.</p>
+      <div class="chips"><span>Performance focused</span><span>Clean code</span><span>Fast learner</span></div>
+    </article>
+    <article class="card">
+      <h3>Find me</h3>
+      <ul class="find mono">
+        <li><span>Roblox</span>Mistmade90</li>
+        <li><span>Discord</span>mistmade90</li>
+        <li><span>Email</span>mistmade90@gmail.com</li>
+      </ul>
+    </article>
+  </div>
+  <div class="code card" aria-label="Luau code example">
+    <div class="code-head mono"><i></i><i></i><i></i><span>PlayerJoin.server.luau</span></div>
+<pre class="mono"><span class="k">local</span> Players = <span class="k">game</span>:<span class="f">GetService</span>(<span class="s">"Players"</span>)
+
+Players.PlayerAdded:<span class="f">Connect</span>(<span class="k">function</span>(player)
+    <span class="f">print</span>(player.Name .. <span class="s">" joined the game"</span>)
+<span class="k">end</span>)<span class="caret"></span></pre>
+  </div>
+</section>
+
+<section id="skills" class="section">
+  <div class="sec-head"><span class="mono tag">02 / skills</span><h2>My <span class="grad">languages</span>.</h2></div>
+  <div class="langs">
+    <div class="card lang"><h3>JavaScript</h3><p>Web apps, Node.js, bots and APIs.</p></div>
+    <div class="card lang"><h3>Luau</h3><p>Roblox scripting for gameplay, UI, data and networking.</p></div>
+    <div class="card lang"><h3>Lua</h3><p>Lightweight scripting and embedded logic.</p></div>
+    <div class="card lang"><h3>Python</h3><p>Automation, tools and backend scripts.</p></div>
+  </div>
+</section>
+
+<section id="projects" class="section">
+  <div class="sec-head"><span class="mono tag">03 / work</span><h2>Previous <span class="grad">work</span>.</h2></div>
+  <div class="stat-banner card">
+    <b class="grad">Nearly 5M</b>
+    <p>contributed place visits across all the games I have developed for.</p>
+  </div>
+  <div class="projects">
+    <article class="card project" style="--bgimg:url('assets/btge.png')">
+      <span class="mono tag">Current</span>
+      <h3>BTGE</h3>
+      <p class="org">Bobos The Galactic Empire</p>
+      <div class="chips"><span>Head Developer</span><span>Head Scripter</span></div>
+      <a class="group-link mono" href="https://www.roblox.com/communities/769797047/Th-G-lactic-Emp-r" target="_blank" rel="noopener">View group ↗</a>
+    </article>
+    <article class="card project" style="--bgimg:url('assets/irf.png')">
+      <span class="mono tag">Current</span>
+      <h3>IRF</h3>
+      <p class="org">Imperialist Robloxian Federation</p>
+      <div class="chips"><span>Scripter</span><span>Contractor</span></div>
+      <a class="group-link mono" href="https://www.roblox.com/communities/872876/Imperialist-Robloxian-Federation" target="_blank" rel="noopener">View group ↗</a>
+    </article>
+    <article class="card project" style="--bgimg:url('assets/jtgr.png')">
+      <span class="mono tag">Former</span>
+      <h3>JTGR</h3>
+      <p class="org">Jacky's The Galactic Republic</p>
+      <div class="chips"><span>Deputy Head Developer</span><span>Head Scripter</span></div>
+      <a class="group-link mono" href="https://www.roblox.com/communities/13467113/The-Galactic-Republic" target="_blank" rel="noopener">View group ↗</a>
+    </article>
+  </div>
+</section>
+
+<section id="pricing" class="section">
+  <div class="sec-head"><span class="mono tag">04 / pricing</span><h2>Fair <span class="grad">prices</span>.</h2></div>
+  <div class="price-top card">
+    <b class="grad">Under 450€</b>
+    <p>I keep my prices fair and I never go over 450€. What you pay depends on how much work your project needs.</p>
+  </div>
+  <div class="steps">
+    <div class="card step"><h3>Effort decides</h3><p>A small fix costs less than a full system. The price follows the amount of work and nothing else.</p></div>
+    <div class="card step"><h3>Fair for everyone</h3><p>No inflated numbers and no hidden extras. You know what you pay before I start.</p></div>
+    <div class="card step"><h3>Talked out in DMs</h3><p>Message me on Discord, tell me what you need and we agree on the price together.</p></div>
+  </div>
+</section>
+
+<section id="contact" class="section">
+  <div class="contact card">
+    <div>
+      <span class="mono tag">05 / contact</span>
+      <h2>Let's build <span class="grad">something</span>.</h2>
+      <p>Have a project or an idea? Reach out through any of these.</p>
+      <div class="contact-links">
+        <a class="mono" href="mailto:mistmade90@gmail.com" id="copy-mail">mistmade90@gmail.com</a>
+        <a class="mono" href="https://www.roblox.com/search/users?keyword=Mistmade90" target="_blank" rel="noopener">Roblox Mistmade90</a>
+        <a class="mono" href="#" id="copy-discord">Discord mistmade90</a>
+      </div>
+    </div>
+    <form id="form" autocomplete="off">
+      <label><span>Name</span><input required name="name" placeholder="Your name"></label>
+      <label><span>Email</span><input required type="email" name="email" placeholder="you@mail.com"></label>
+      <label><span>Message</span><textarea required rows="4" name="msg" placeholder="What's on your mind?"></textarea></label>
+      <button class="btn primary" type="submit">Send message</button>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <span class="mono">© <span id="year"></span> Mistmade90</span>
+  <a href="#home" class="mono">Back to top ↑</a>
+</footer>
+
+<div id="glow" aria-hidden="true"></div>
+<div class="toast mono" id="toast"></div>
+<script src="script.js"></script>
+</body>
+</html>
