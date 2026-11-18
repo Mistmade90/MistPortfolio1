@@ -89,7 +89,7 @@
     });
   }
 
-  const DISCORD_ID = '';
+  const DISCORD_ID = '579581993050832896';
 
   if (/^\d{15,22}$/.test(DISCORD_ID)) {
     let spotify = null;
