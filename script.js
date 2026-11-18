@@ -89,23 +89,6 @@
     });
   }
 
-  const nameEl = document.querySelector('.hero h1 .grad');
-  const finalName = nameEl.textContent;
-  const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
-  let scrambling = false;
-  const scramble = () => {
-    if (scrambling) return;
-    scrambling = true;
-    let n = 0;
-    const iv = setInterval(() => {
-      nameEl.textContent = finalName.split('').map((c, i) => i < n ? c : chars[Math.floor(Math.random() * chars.length)]).join('');
-      n += .5;
-      if (n > finalName.length) { clearInterval(iv); nameEl.textContent = finalName; scrambling = false; }
-    }, 40);
-  };
-  nameEl.addEventListener('pointerenter', scramble);
-  setTimeout(scramble, 400);
-
   $('#copy-mail').addEventListener('click', (e) => {
     e.preventDefault();
     navigator.clipboard?.writeText('mistmade90@gmail.com').then(() => toast('Email copied'), () => { location.href = 'mailto:mistmade90@gmail.com'; });
