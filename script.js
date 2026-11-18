@@ -171,16 +171,43 @@
       .then((j) => { if (j.success) { applyPresence(j.data); progress(); } })
       .catch(() => {});
     loadPresence();
-    setInterval(loadPresence, 15000);
+    setInterval(loadPresence, 60000);
 
-    fetch(`https://dcdn.dstn.to/profile/${DISCORD_ID}`)
+    let ws, hb, retry = 1000;
+    const connect = () => {
+      try { ws = new WebSocket('wss://api.lanyard.rest/socket'); } catch (e) { return; }
+      ws.onopen = () => { retry = 1000; };
+      ws.onmessage = (m) => {
+        let p;
+        try { p = JSON.parse(m.data); } catch (e) { return; }
+        if (p.op === 1) {
+          ws.send(JSON.stringify({ op: 2, d: { subscribe_to_id: DISCORD_ID } }));
+          clearInterval(hb);
+          hb = setInterval(() => { if (ws.readyState === 1) ws.send(JSON.stringify({ op: 3 })); }, p.d.heartbeat_interval);
+        } else if (p.op === 0 && p.d && p.d.discord_user) {
+          applyPresence(p.d);
+          progress();
+        }
+      };
+      ws.onclose = () => { clearInterval(hb); setTimeout(connect, retry); retry = Math.min(retry * 2, 30000); };
+    };
+    connect();
+
+    setInterval(() => { if (!spotify && !document.hidden) showLastfm(); }, 10000);
+    document.addEventListener('visibilitychange', () => { if (!document.hidden) { loadPresence(); loadProfile(); } });
+
+    const loadProfile = () => fetch(`https://dcdn.dstn.to/profile/${DISCORD_ID}`)
       .then((r) => r.json())
       .then((p) => {
         const user = p.user || {};
         const banner = $('#dc-banner');
         if (user.banner) banner.style.backgroundImage = `url(${CDN}/banners/${DISCORD_ID}/${user.banner}.${user.banner.startsWith('a_') ? 'gif' : 'png'}?size=600)`;
-        else if (user.banner_color) banner.style.backgroundColor = user.banner_color;
+        else {
+          banner.style.backgroundImage = '';
+          if (user.banner_color) banner.style.backgroundColor = user.banner_color;
+        }
         const wrap = $('#dc-badges');
+        wrap.textContent = '';
         (p.badges || []).forEach((b) => {
           const img = document.createElement('img');
           img.src = `${CDN}/badge-icons/${b.icon}.png`;
@@ -191,6 +218,8 @@
         });
       })
       .catch(() => {});
+    loadProfile();
+    setInterval(loadProfile, 120000);
   }
 
   const out = $('#term-out');
