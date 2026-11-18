@@ -89,6 +89,71 @@
     });
   }
 
+  const DISCORD_ID = '';
+
+  if (/^\d{15,22}$/.test(DISCORD_ID)) {
+    let spotify = null;
+    const CDN = 'https://cdn.discordapp.com';
+    const setText = (id, v) => { $(id).textContent = v; };
+
+    const applyPresence = (d) => {
+      const u = d.discord_user;
+      $('#dc').hidden = false;
+      setText('#dc-name', u.global_name || u.username);
+      setText('#dc-user', u.username);
+      $('#dc-avatar').src = u.avatar
+        ? `${CDN}/avatars/${u.id}/${u.avatar}.${u.avatar.startsWith('a_') ? 'gif' : 'png'}?size=256`
+        : `${CDN}/embed/avatars/${Number((BigInt(u.id) >> 22n) % 6n)}.png`;
+      const dot = $('#dc-dot');
+      dot.className = ['online', 'idle', 'dnd'].includes(d.discord_status) ? d.discord_status : 'off';
+      const custom = (d.activities || []).find((a) => a.type === 4);
+      const game = (d.activities || []).find((a) => a.type === 0);
+      setText('#dc-status', custom && custom.state ? custom.state : game ? `Playing ${game.name}` : '');
+      spotify = d.listening_to_spotify ? d.spotify : null;
+      const box = $('#dc-music');
+      box.hidden = !spotify;
+      if (spotify) {
+        $('#dc-art').src = spotify.album_art_url;
+        setText('#dc-title', spotify.song);
+        setText('#dc-artist', spotify.artist.replace(/;/g, ','));
+      }
+    };
+
+    const progress = () => {
+      if (!spotify) return;
+      const { start, end } = spotify.timestamps;
+      const p = Math.min(100, Math.max(0, (Date.now() - start) / (end - start) * 100));
+      $('#dc-prog').style.width = p + '%';
+    };
+    setInterval(progress, 1000);
+
+    const loadPresence = () => fetch(`https://api.lanyard.rest/v1/users/${DISCORD_ID}`)
+      .then((r) => r.json())
+      .then((j) => { if (j.success) { applyPresence(j.data); progress(); } })
+      .catch(() => {});
+    loadPresence();
+    setInterval(loadPresence, 15000);
+
+    fetch(`https://dcdn.dstn.to/profile/${DISCORD_ID}`)
+      .then((r) => r.json())
+      .then((p) => {
+        const user = p.user || {};
+        const banner = $('#dc-banner');
+        if (user.banner) banner.style.backgroundImage = `url(${CDN}/banners/${DISCORD_ID}/${user.banner}.${user.banner.startsWith('a_') ? 'gif' : 'png'}?size=600)`;
+        else if (user.banner_color) banner.style.backgroundColor = user.banner_color;
+        const wrap = $('#dc-badges');
+        (p.badges || []).forEach((b) => {
+          const img = document.createElement('img');
+          img.src = `${CDN}/badge-icons/${b.icon}.png`;
+          img.alt = b.description || 'Badge';
+          img.title = b.description || '';
+          img.loading = 'lazy';
+          wrap.appendChild(img);
+        });
+      })
+      .catch(() => {});
+  }
+
   const out = $('#term-out');
   const input = $('#term-in');
   const say = (text, cls) => {
