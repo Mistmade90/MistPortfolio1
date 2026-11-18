@@ -89,6 +89,57 @@
     });
   }
 
+  const out = $('#term-out');
+  const input = $('#term-in');
+  const say = (text, cls) => {
+    const d = document.createElement('div');
+    if (cls) d.className = cls;
+    d.textContent = text;
+    out.appendChild(d);
+    out.scrollTop = out.scrollHeight;
+  };
+  const commands = {
+    help: () => ['Commands you can try', 'whoami   skills   work   visits   price   bugs   contact   time   clear'],
+    whoami: () => ['Mistmade90, developer and scripter. Head Developer at BTGE.'],
+    skills: () => ['JavaScript, Luau, Lua and Python'],
+    work: () => ['BTGE  Head Developer, Head Scripter (current)', 'IRF   Scripter, Contractor (current)', 'JTGR  Deputy Head Developer, Head Scripter (former)'],
+    visits: () => ['Nearly 5M contributed place visits across all games I developed for'],
+    price: () => ['Always fair and under 450€. It depends on the effort and we talk it out in DMs.'],
+    bugs: () => ['Bugs in my work get fixed for free. You only pay for the product.'],
+    contact: () => ['Email    mistmade90@gmail.com', 'Discord  mistmade90', 'Roblox   Mistmade90'],
+    time: () => [new Date().toLocaleString('en-GB')],
+    clear: () => { out.textContent = ''; return []; }
+  };
+  const history = [];
+  let hi = 0;
+  const run = (raw) => {
+    const cmd = raw.trim().toLowerCase();
+    if (!cmd) return;
+    history.push(cmd);
+    hi = history.length;
+    say(raw.trim(), 'cmd');
+    const fn = commands[cmd];
+    if (fn) fn().forEach((l, i) => say(l, i === 0 && cmd === 'help' ? 'hl' : ''));
+    else say(`command not found ${cmd}, type help`);
+  };
+  say('Welcome. Type help to see what this terminal can do.', 'hl');
+  $('#term-form').addEventListener('submit', (e) => { e.preventDefault(); run(input.value); input.value = ''; });
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowUp' && history.length) { e.preventDefault(); hi = Math.max(0, hi - 1); input.value = history[hi]; }
+    if (e.key === 'ArrowDown') { e.preventDefault(); hi = Math.min(history.length, hi + 1); input.value = history[hi] || ''; }
+  });
+  $$('.term-chips button').forEach((b) => b.addEventListener('click', () => run(b.dataset.cmd)));
+
+  const modeBtn = $('#mode');
+  const setMode = (on) => {
+    document.documentElement.classList.toggle('imperial', on);
+    document.body.classList.toggle('imperial', on);
+    modeBtn.textContent = on ? 'Back to normal' : 'Imperial mode';
+    try { localStorage.setItem('imperial', on ? '1' : '0'); } catch (e) {}
+  };
+  modeBtn.addEventListener('click', () => { const on = !document.body.classList.contains('imperial'); setMode(on); if (on) toast('The Empire approves'); });
+  try { if (localStorage.getItem('imperial') === '1') setMode(true); } catch (e) {}
+
   $('#copy-mail').addEventListener('click', (e) => {
     e.preventDefault();
     navigator.clipboard?.writeText('mistmade90@gmail.com').then(() => toast('Email copied'), () => { location.href = 'mailto:mistmade90@gmail.com'; });

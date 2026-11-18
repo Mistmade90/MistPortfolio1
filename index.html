@@ -89,6 +89,22 @@ Players.PlayerAdded:<span class="f">Connect</span>(<span class="k">function</spa
     <div class="card lang"><h3>Lua</h3><p>Lightweight scripting and embedded logic.</p></div>
     <div class="card lang"><h3>Python</h3><p>Automation, tools and backend scripts.</p></div>
   </div>
+  <div class="term card">
+    <div class="code-head mono"><i></i><i></i><i></i><span>mist@portfolio ~ interactive terminal</span></div>
+    <div class="term-out mono" id="term-out" aria-live="polite"></div>
+    <form class="term-form mono" id="term-form" autocomplete="off">
+      <span class="prompt">$</span>
+      <input id="term-in" spellcheck="false" aria-label="Terminal input" placeholder="type help and press enter">
+    </form>
+    <div class="term-chips mono">
+      <button type="button" data-cmd="help">help</button>
+      <button type="button" data-cmd="whoami">whoami</button>
+      <button type="button" data-cmd="skills">skills</button>
+      <button type="button" data-cmd="work">work</button>
+      <button type="button" data-cmd="price">price</button>
+      <button type="button" data-cmd="contact">contact</button>
+    </div>
+  </div>
 </section>
 
 <section id="projects" class="section">
@@ -137,6 +153,12 @@ Players.PlayerAdded:<span class="f">Connect</span>(<span class="k">function</spa
     <h3>Bugs get fixed for free</h3>
     <p>If a bug shows up in something I made, I fix it without charging anything. You only pay for the product, and a product with errors gets repaired for free.</p>
   </div>
+  <div class="faq">
+    <details><summary>How do I order something</summary><p>Send me a message on Discord (mistmade90) and tell me what you need. We talk through it in DMs.</p></details>
+    <details><summary>How much will it cost</summary><p>It depends on the effort. My prices are fair and always stay under 450€.</p></details>
+    <details><summary>What if something breaks later</summary><p>I fix it for free. You never pay for repairs on something I built.</p></details>
+    <details><summary>What do you work with</summary><p>JavaScript, Luau, Lua and Python. Mostly Roblox games, bots, tools and websites.</p></details>
+  </div>
 </section>
 
 <section id="contact" class="section">
@@ -163,6 +185,7 @@ Players.PlayerAdded:<span class="f">Connect</span>(<span class="k">function</spa
 
 <footer class="footer">
   <span class="mono">© <span id="year"></span> Mistmade90</span>
+  <button class="mode mono" id="mode" type="button">Imperial mode</button>
   <a href="#home" class="mono">Back to top ↑</a>
 </footer>
 

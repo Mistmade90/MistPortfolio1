@@ -178,6 +178,41 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
 .price-top b{font-family:'Space Grotesk',sans-serif;font-size:clamp(2.6rem,7vw,4.6rem);line-height:1;letter-spacing:-.04em;filter:drop-shadow(0 0 28px rgba(143,168,214,.4))}
 .price-top p{flex:1;min-width:240px;font-size:1.08rem}
 .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+
+.term{margin-top:16px;padding:0;overflow:hidden;background:rgba(8,9,13,.85)}
+.term:hover{transform:none}
+.term-out{padding:18px 22px 4px;font-size:.86rem;line-height:1.75;height:230px;overflow-y:auto;color:var(--mute);white-space:pre-wrap;word-break:break-word}
+.term-out .cmd{color:var(--text)}
+.term-out .cmd::before{content:"$ ";color:var(--a1)}
+.term-out .hl{color:var(--a2)}
+.term-form{display:flex;gap:10px;padding:8px 22px 14px;font-size:.88rem}
+.prompt{color:var(--a1)}
+.term-form input{flex:1;background:none;border:none;border-radius:0;padding:0;font-family:'JetBrains Mono',monospace;font-size:.88rem;outline:none;box-shadow:none}
+.term-chips{display:flex;flex-wrap:wrap;gap:8px;padding:0 22px 18px}
+.term-chips button{background:var(--card);border:1px solid var(--line);border-radius:100px;padding:5px 14px;font-size:.76rem;color:var(--mute);cursor:pointer;transition:color .2s,border-color .2s}
+.term-chips button:hover{color:var(--text);border-color:var(--a1)}
+
+.faq{margin-top:16px;display:grid;gap:10px}
+.faq details{border:1px solid var(--line);border-radius:16px;background:var(--card);padding:0 22px;transition:border-color .2s}
+.faq details[open]{border-color:rgba(143,168,214,.45)}
+.faq summary{list-style:none;cursor:pointer;padding:18px 0;font-weight:500;display:flex;justify-content:space-between;gap:12px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:var(--a1);font-family:'JetBrains Mono',monospace;transition:transform .2s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{color:var(--mute);padding-bottom:18px;max-width:640px}
+
+.mode{background:none;border:1px solid var(--line);border-radius:100px;padding:6px 16px;font-size:.78rem;color:var(--mute);cursor:pointer;transition:color .2s,border-color .2s}
+.mode:hover{color:var(--text);border-color:var(--a1)}
+
+.hero::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:
+radial-gradient(1.2px 1.2px at 12% 18%,#fff,transparent),radial-gradient(1px 1px at 28% 62%,#dfe6f5,transparent),radial-gradient(1.5px 1.5px at 44% 12%,#fff,transparent),radial-gradient(1px 1px at 61% 74%,#dfe6f5,transparent),radial-gradient(1.2px 1.2px at 77% 28%,#fff,transparent),radial-gradient(1px 1px at 90% 58%,#dfe6f5,transparent),radial-gradient(1.4px 1.4px at 7% 80%,#fff,transparent),radial-gradient(1px 1px at 52% 44%,#dfe6f5,transparent),radial-gradient(1.2px 1.2px at 95% 10%,#fff,transparent),radial-gradient(1px 1px at 35% 90%,#dfe6f5,transparent);background-size:620px 520px;animation:twinkle 5s ease-in-out infinite alternate}
+@keyframes twinkle{from{opacity:.35}to{opacity:.9}}
+.hero-inner{position:relative;z-index:1}
+
+.imperial{--a1:#d4503a;--a2:#ffc2b6;--grad:linear-gradient(120deg,#a8281a,#ffb3a5 60%,#d4503a)}
+.imperial body::before,body.imperial::before{background:radial-gradient(900px 500px at 85% -5%,rgba(212,80,58,.18),transparent 70%),radial-gradient(700px 500px at 0% 60%,rgba(212,80,58,.08),transparent 70%),linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px) 0 0/56px 56px,linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px) 0 0/56px 56px}
+.imperial .stat-banner,.imperial .price-top{background:linear-gradient(120deg,rgba(212,80,58,.16),rgba(255,255,255,.02) 60%)}
+.imperial .card:hover,.imperial .faq details[open]{border-color:rgba(212,80,58,.5)}
 .guarantee{margin-top:16px;border-left:3px solid var(--a1)}
 .guarantee p{max-width:680px}
 
