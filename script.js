@@ -110,12 +110,28 @@
       const game = (d.activities || []).find((a) => a.type === 0);
       setText('#dc-status', custom && custom.state ? custom.state : game ? `Playing ${game.name}` : '');
       spotify = d.listening_to_spotify ? d.spotify : null;
+      const other = (d.activities || []).find((a) => a.type === 2 && a.name !== 'Spotify');
       const box = $('#dc-music');
-      box.hidden = !spotify;
+      const art = $('#dc-art');
+      box.hidden = false;
+      box.classList.toggle('idle', !spotify && !other);
+      $('#dc-prog').style.width = '0%';
       if (spotify) {
-        $('#dc-art').src = spotify.album_art_url;
+        art.hidden = false;
+        art.src = spotify.album_art_url;
+        setText('#dc-label', 'Listening to Spotify');
         setText('#dc-title', spotify.song);
         setText('#dc-artist', spotify.artist.replace(/;/g, ','));
+      } else if (other) {
+        art.hidden = true;
+        setText('#dc-label', `Listening on ${other.name}`);
+        setText('#dc-title', other.details || other.name);
+        setText('#dc-artist', other.state || '');
+      } else {
+        art.hidden = true;
+        setText('#dc-label', 'Music');
+        setText('#dc-title', 'Nothing playing right now');
+        setText('#dc-artist', 'Starts showing as soon as I play something on Spotify');
       }
     };
 

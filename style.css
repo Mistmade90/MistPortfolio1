@@ -217,6 +217,9 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
 .dc-song small{font-size:.68rem;color:#1db954;text-transform:uppercase;letter-spacing:.08em}
 .dc-song b{font-size:1rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .dc-song span{color:var(--mute);font-size:.88rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dc-music img[hidden]{display:none}
+.dc-music.idle .dc-song small{color:var(--mute)}
+.dc-music.idle .dc-bar{display:none}
 .dc-bar{height:4px;border-radius:4px;background:var(--line);margin-top:8px;overflow:hidden}
 .dc-bar i{display:block;height:100%;width:0;background:#1db954}
 
