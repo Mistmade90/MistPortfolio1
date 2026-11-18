@@ -90,8 +90,8 @@
   }
 
   const DISCORD_ID = '579581993050832896';
-  const LASTFM_USER = '';
-  const LASTFM_KEY = '';
+  const LASTFM_USER = 'Mistmade90';
+  const LASTFM_KEY = '6010810d36e5fa30619c774d6e4bb83b';
 
   if (/^\d{15,22}$/.test(DISCORD_ID)) {
     let spotify = null;
